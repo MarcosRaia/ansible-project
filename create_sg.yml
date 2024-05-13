@@ -1,3 +1,4 @@
+---
 - name: Criar grupo de segurança
       amazon.aws.ec2_group:
         name: "SgProject"
