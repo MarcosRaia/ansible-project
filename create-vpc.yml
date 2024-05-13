@@ -5,7 +5,7 @@
   tasks:
     - name: Criar uma nova VPC
       amazon.aws.ec2_vpc_net:
-        name: "MinhaVPC"
+        name: "VpcProject"
         cidr_block: "10.10.0.0/16"
         region: us-east-1
         state: present
