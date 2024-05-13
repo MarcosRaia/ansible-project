@@ -1,0 +1,25 @@
+---
+- name: Lançar uma instância EC2 em uma VPC específica
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Criar instância EC2
+      amazon.aws.ec2_instance:   # Certifique-se de ter a coleção amazon.aws instalada
+        name: "ProjectEC2"
+        key_name: "projectkey"  # Substitua pelo nome do seu par de chaves SSH
+        instance_type: "t2.micro"
+        image_id: "ami-0c55b159cbfafe1f0"  # Substitua pela AMI desejada, conforme sua região
+        network:
+          assign_public_ip: yes
+          security_group: "sg-05ae0735594686b14"  # Substitua pelo ID do seu grupo de segurança
+          subnet_id: "subnet-01da551daab2a0fe2"  # Substitua pelo ID da sua sub-rede na VPC
+        tags:
+          Name: "ProejctEC2"
+        region: "us-east-1"  # Substitua pela sua região AWS
+        wait: true
+        state: present
+      register: ec2_info
+
+    - name: Mostrar informações da instância
+      debug:
+        var: ec2_info.instance
