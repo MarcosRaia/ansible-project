@@ -1,0 +1,12 @@
+---
+- name: Criar sub-rede
+      amazon.aws.ec2_vpc_subnet:
+        state: present
+        vpc_id: "{{ vpc.vpc.id }}"
+        cidr: "10.10.1.0/24"
+        az: us-east-1a
+        map_public_ip_on_launch: true
+        tags:
+          Name: "Project_SubRede"
+        region: us-east-1
+      register: subnet
